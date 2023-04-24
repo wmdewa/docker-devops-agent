@@ -25,14 +25,14 @@ schedules:
 
 steps:
 
-- bash: docker pull ghcr.io/groovy-sky/ubuntu:focal; docker tag ghcr.io/groovy-sky/ubuntu:focal ubuntu:focal; docker build -f $(system.defaultWorkingDirectory)/docker/Dockerfile -t $(registryLogin)/$(imageName):$(imageversion) --build-arg ANSIBLE_VERSION=$(imageversion) $(system.defaultWorkingDirectory)
+- bash: docker pull ghcr.io/groovy-sky/ubuntu:focal; docker tag ghcr.io/groovy-sky/ubuntu:focal ubuntu:focal; docker build -f $(system.defaultWorkingDirectory)/docker/Dockerfile -t $(registryLink)/$(imageName):$(imageversion) --build-arg ANSIBLE_VERSION=$(imageversion) $(system.defaultWorkingDirectory)
   displayName: 'docker build'
 
-- bash: docker login -u $(registryLogin) -p $(registryPassword) 
+- bash: docker login $(registryLink) -u $(registryUsername) -p $(registryPassword) 
   displayName: 'docker login'
   condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
 
 - bash: |
-    docker push $(registryLogin)/$(imageName):$(imageversion)
+    docker push $(registryLink)/$(imageName):$(imageversion)
   displayName: 'docker push'
   condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
