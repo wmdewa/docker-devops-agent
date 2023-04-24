@@ -1,7 +1,7 @@
 name: $(BuildDefinitionName)_[$(Date:ddMMyyyy)]
 
 pool:
-  vmImage: 'Ubuntu 20.04'
+  vmImage: 'Ubuntu 22.04'
 
 trigger:
   batch: true
@@ -21,10 +21,6 @@ schedules:
     - master
   always: true
   
-variables:
-  imageName: 'devops-agent'
-  imageversion: 'latest'
-  registryLogin: 'gr00vysky'
   # define imageName, registryLogin, registryPassword variables in the build pipeline using UI
 
 steps:
