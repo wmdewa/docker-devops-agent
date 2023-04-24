@@ -1,7 +1,7 @@
 name: $(BuildDefinitionName)_[$(Date:ddMMyyyy)]
 
 pool:
-  vmImage: 'Ubuntu 22.04'
+  vmImage: 'ubuntu-latest'
 
 trigger:
   batch: true
